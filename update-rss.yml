@@ -1,0 +1,40 @@
+name: Update Buddy Quota RSS
+
+on:
+  schedule:
+    # 每天北京时间 08:00 更新 (UTC 00:00)
+    - cron: '0 0 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-rss:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Query balance & generate RSS
+        env:
+          BUDDY_KEY: ${{ secrets.BUDDY_KEY }}
+        run: |
+          python3 scripts/query_balance.py
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add rss.xml
+          if git diff --cached --quiet; then
+            echo "RSS 无变化, 跳过提交"
+          else
+            git commit -m "Update RSS: $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
