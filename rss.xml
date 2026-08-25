@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-<title>Buddy 积分 | 剩余 8,735.36</title>
+<title>Buddy 积分 | 剩余 8,678.33</title>
 <link>https://btc-gz-cn3.chicross.cn/client/</link>
 <description>Buddy 服务聚合额度平台积分监控</description>
 <language>zh-cn</language>
-<lastBuildDate>Tue, 25 Aug 2026 09:16:43 +0800</lastBuildDate>
+<lastBuildDate>Tue, 25 Aug 2026 09:20:25 +0800</lastBuildDate>
 <item>
-<title>Buddy 积分 | 剩余 8,735.36</title>
-<description>剩余积分: 8,735.36
-累计已用: 26,764.64 (75.4%)
+<title>Buddy 积分 | 剩余 8,678.33</title>
+<description>剩余积分: 8,678.33
+累计已用: 26,821.67 (75.6%)
 累计充值: 35,500
-今日请求: 104 次
-今日消耗: 348.88
+今日请求: 119 次
+今日消耗: 405.91
 额度包: 0 个
 版本: AGG
-更新时间: 2026-08-25 09:16</description>
-<pubDate>Tue, 25 Aug 2026 09:16:43 +0800</pubDate>
-<guid isPermaLink="false">buddy-quota-20260825091643</guid>
+更新时间: 2026-08-25 09:20</description>
+<pubDate>Tue, 25 Aug 2026 09:20:25 +0800</pubDate>
+<guid isPermaLink="false">buddy-quota-20260825092025</guid>
 </item>
 </channel>
 </rss>
