@@ -2,8 +2,8 @@ name: Update Buddy Quota RSS
 
 on:
   schedule:
-    # 每 15 分钟更新一次 (GitHub Actions cron 使用 UTC)
-    - cron: '*/15 * * * *'
+    # 每 5 分钟更新一次 (GitHub Actions cron 使用 UTC)
+    - cron: '*/5 * * * *'
   workflow_dispatch: {}
 
 permissions:
