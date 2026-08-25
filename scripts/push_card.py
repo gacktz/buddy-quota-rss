@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Buddy 积分 → Quote/0 墨水屏推送脚本
-流程: 读取积分数据 → 生成 v7 卡片 → 推送到设备图像 API
+流程: 读取积分数据 → 生成 v8 卡片 → 推送到设备图像 API
 
 用法:
     # 完整流程（查询接口 + 生成 + 推送）
@@ -31,7 +31,7 @@ import sys
 import urllib.error
 import urllib.request
 
-from gen_card_v7 import draw_card, parse_rss, query_balance
+from gen_card_v8 import draw_card, parse_rss, query_balance
 
 PUSH_URL = "https://dot.mindreset.tech/api/authV2/open/device/{sn}/image"
 
