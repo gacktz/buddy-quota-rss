@@ -27,9 +27,11 @@ jobs:
         run: |
           python3 scripts/query_balance.py
 
-      - name: Install Pillow
+      - name: Install Pillow & CJK fonts
         run: |
           pip install pillow
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
 
       - name: Generate e-ink card & push to device
         env:

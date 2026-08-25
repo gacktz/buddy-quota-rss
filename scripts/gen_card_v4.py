@@ -66,6 +66,8 @@ def find_font(sizes: list) -> list:
                 except Exception:
                     continue
         if f is None:
+            print(f"⚠️  警告: 未找到中文字体(size={size})，将使用默认字体(中文会显示为方框)",
+                  file=sys.stderr)
             f = ImageFont.load_default()
         fonts.append(f)
     return fonts
@@ -151,9 +153,9 @@ def draw_card(data: dict, now: datetime.datetime, out_path: str = "card_v4.png")
     total = balance + used
     pct_used = (used / total * 100) if total > 0 else 0
 
-    # 字体: [标题, 左栏大数字(30), 左栏标签(8), 左栏格子数值(16), 右栏标签(8), 右栏数值(12)]
+    # 字体: [标题(14), 左栏大数字(36), 左栏标签(9), 左栏格子数值(18), 右栏标签(9), 右栏数值(14)]
     f_title, f_bal, f_lbl, f_left_val, f_rc_lbl, f_rc_val = find_font(
-        [13, 30, 8, 16, 8, 12])
+        [14, 36, 9, 18, 9, 14])
 
     # ---- 标题行 ----
     d.text((MARGIN, 4), "BUDDY 积分", font=f_title, fill=BLACK)
@@ -169,11 +171,11 @@ def draw_card(data: dict, now: datetime.datetime, out_path: str = "card_v4.png")
 
     # 超大数字（自动适配宽度）
     num_str = fmt_num(balance)
-    f_num = fit_font(d, f_bal, num_str, lw, min_size=18)
+    f_num = fit_font(d, f_bal, num_str, lw, min_size=20)
     bbox = d.textbbox((0, 0), num_str, font=f_num)
     nw, nh = bbox[2] - bbox[0], bbox[3] - bbox[1]
-    # 垂直居中于 36..76 区域
-    d.text((lx + (lw - nw) / 2, 36 + (40 - nh) / 2), num_str,
+    # 垂直居中于 34..80 区域
+    d.text((lx + (lw - nw) / 2, 34 + (46 - nh) / 2), num_str,
            font=f_num, fill=BLACK)
 
     # 进度条
@@ -204,7 +206,7 @@ def draw_card(data: dict, now: datetime.datetime, out_path: str = "card_v4.png")
         # 标签
         d.text((x0 + 3, cell_y0 + 2), label, font=f_lbl, fill=BLACK)
         # 数值（垂直居中于下半部）
-        f_val = fit_font(d, f_left_val, value, cell_w - 6, min_size=10)
+        f_val = fit_font(d, f_left_val, value, cell_w - 6, min_size=11)
         bbox_v = d.textbbox((0, 0), value, font=f_val)
         vw, vh = bbox_v[2] - bbox_v[0], bbox_v[3] - bbox_v[1]
         vy_mid = (cell_y0 + 15 + cell_y1) / 2  # 标签之下到格底的中间
@@ -236,7 +238,7 @@ def draw_card(data: dict, now: datetime.datetime, out_path: str = "card_v4.png")
             d.line([(x1, y0), (x1, y1)], fill=BLACK, width=1)
         # 标签 + 数值
         d.text((x0 + 4, y0 + 3), label, font=f_rc_lbl, fill=BLACK)
-        f_val = fit_font(d, f_rc_val, value, col_w - 8, min_size=9)
+        f_val = fit_font(d, f_rc_val, value, col_w - 8, min_size=10)
         d.text((x0 + 4, y1 - 17), value, font=f_val, fill=BLACK)
 
     img.save(out_path, "PNG")
