@@ -31,7 +31,7 @@ import sys
 import urllib.error
 import urllib.request
 
-from gen_card_v4 import draw_card, parse_rss, query_balance
+from gen_card_v5 import draw_card, parse_rss, query_balance
 
 PUSH_URL = "https://dot.mindreset.tech/api/authV2/open/device/{sn}/image"
 
