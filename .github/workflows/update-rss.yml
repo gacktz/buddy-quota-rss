@@ -2,8 +2,8 @@ name: Update Buddy Quota RSS
 
 on:
   schedule:
-    # 每天北京时间 08:00 更新 (UTC 00:00)
-    - cron: '*/10 * * * *'
+    # 每 15 分钟更新一次 (GitHub Actions cron 使用 UTC)
+    - cron: '*/15 * * * *'
   workflow_dispatch: {}
 
 permissions:
@@ -26,6 +26,17 @@ jobs:
           BUDDY_KEY: ${{ secrets.BUDDY_KEY }}
         run: |
           python3 scripts/query_balance.py
+
+      - name: Install Pillow
+        run: |
+          pip install pillow
+
+      - name: Generate e-ink card & push to device
+        env:
+          DOT_TOKEN: ${{ secrets.DOT_TOKEN }}
+          DEVICE_SN: ${{ secrets.DEVICE_SN }}
+        run: |
+          python3 scripts/push_card.py --rss rss.xml
 
       - name: Commit & push
         run: |
